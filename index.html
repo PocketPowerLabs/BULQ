@@ -70,19 +70,25 @@
 <body>
 <main>
   <h1>Privacy Policy for BULQ</h1>
-  <p class="effective"><strong>Effective date:</strong> 19 June 2026</p>
+  <p class="effective"><strong>Effective date:</strong> 23 June 2026</p>
 
   <p class="intro">This Privacy Policy explains how <strong>BULQ</strong> ("we", "us", or "our")
   handles your information in the BULQ mobile application ("BULQ", "the app"). BULQ is a workout
   tracking app for Android. By using BULQ you agree to the practices described here.</p>
 
   <p>We built BULQ to keep your data on your device by default. We do not run any advertising,
-  analytics, or third-party tracking, and we never sell your data.</p>
+  usage analytics, or third-party behavioural tracking, and we never sell your data. To keep the
+  app stable we collect limited, anonymous crash diagnostics, which you can turn off at any time
+  (see <em>Crash diagnostics</em>).</p>
 
   <h2>Summary</h2>
   <ul>
-    <li><strong>No ads, no analytics, no trackers.</strong> We do not collect usage analytics or
-      crash telemetry, and we include no advertising or tracking SDKs.</li>
+    <li><strong>No ads, no usage analytics, no trackers.</strong> We include no advertising or
+      behavioural-tracking SDKs, and we never sell your data.</li>
+    <li><strong>Anonymous crash diagnostics, on by default.</strong> To diagnose and fix crashes
+      we send anonymous crash reports — no name, email, account ID, or workout data — to our
+      crash-reporting provider (processed in the EU). You can turn this off in <strong>Settings →
+      Privacy</strong>.</li>
     <li><strong>Your workout data lives on your device.</strong> It is stored locally and is only
       sent to the cloud if you sign in and turn on Cloud Backup.</li>
     <li><strong>Sign-in is optional</strong> and used only for cloud backup. You can use the core
@@ -124,7 +130,22 @@
   <p>Your in-app settings (units, rest-timer preferences, theme/accent, plate inventory,
   breathing-guide options, etc.) are stored locally and included in backups you create.</p>
 
-  <h3>4. Information we do <strong>not</strong> collect</h3>
+  <h3>4. Crash and diagnostic data</h3>
+  <p>To diagnose crashes and improve stability, BULQ sends <strong>anonymous crash reports</strong>
+  to our crash-reporting provider (<strong>Sentry</strong>, processed in the <strong>EU</strong>).
+  A crash report may include:</p>
+  <ul>
+    <li>the error and its technical stack trace,</li>
+    <li>your device model and Android version,</li>
+    <li>the BULQ app version, and</li>
+    <li>a randomly generated event identifier.</li>
+  </ul>
+  <p>These reports <strong>do not</strong> include your name, email address, account identifier, IP
+  address, or any of your workout, health, or profile data. This is <strong>on by default</strong>
+  but fully optional — you can turn it off any time in <strong>Settings → Privacy → "Send anonymous
+  crash reports"</strong>, after which no crash data is sent. See <em>Crash diagnostics</em> below.</p>
+
+  <h3>5. Information we do <strong>not</strong> collect</h3>
   <p>We do <strong>not</strong> collect your precise or approximate location, contacts, photos,
   microphone or camera input, advertising identifiers, or app-usage analytics. We do not track you
   across other apps or websites.</p>
@@ -134,7 +155,8 @@
   <ul>
     <li>provide and operate the app's features;</li>
     <li>authenticate you (if you sign in) and store/restore your cloud backups;</li>
-    <li>write workouts and body weight to Health Connect, if you enable it.</li>
+    <li>write workouts and body weight to Health Connect, if you enable it;</li>
+    <li>diagnose crashes and improve the app's stability (only while crash reporting is enabled).</li>
   </ul>
   <p>We do <strong>not</strong> use your data for advertising, profiling, or sale, and we do not
   use your health data for any purpose other than providing the features you request.</p>
@@ -165,6 +187,18 @@
   and can be turned off at any time in BULQ's settings or in Health Connect itself. Your use of
   Health Connect is also governed by Google's Health Connect terms and privacy policy.</p>
 
+  <h2>Crash diagnostics</h2>
+  <p>To keep BULQ stable we use <strong>Sentry</strong>, a crash- and error-reporting service, to
+  receive <strong>anonymous</strong> reports when the app crashes or hits an unexpected error. As
+  described in <em>Crash and diagnostic data</em> above, these reports contain only technical
+  information (error, stack trace, device model, Android version, app version) and <strong>no
+  personal, account, or fitness data</strong>. We have configured the integration so that no IP
+  address or user identity is attached, and crash data is processed in the
+  <strong>European Union</strong>.</p>
+  <p>Crash reporting is <strong>on by default</strong> but optional. Turn it off at any time in
+  <strong>Settings → Privacy → "Send anonymous crash reports"</strong>; once off, BULQ stops sending
+  any crash data.</p>
+
   <h2>How we share information</h2>
   <p>We do not sell your personal information and we do not share it for advertising. We share data
   only with service providers that operate the app on our behalf:</p>
@@ -172,6 +206,8 @@
     <li><strong>Supabase</strong> — authentication and cloud backup storage (only if you sign in /
       enable backup).</li>
     <li><strong>Google</strong> — Google Sign-In and Google Play services (only if you sign in).</li>
+    <li><strong>Sentry</strong> (Functional Software, Inc.) — anonymous crash diagnostics, processed
+      in the EU (only while crash reporting is enabled).</li>
   </ul>
   <p>We may disclose information if required by law, regulation, or valid legal process, or to
   protect the rights, safety, and security of our users or the app.</p>
@@ -183,6 +219,8 @@
     <li>Network traffic to our service provider uses <strong>HTTPS/TLS</strong>.</li>
     <li>Cloud backups are protected by per-user access controls so that only your authenticated
       account can read them.</li>
+    <li>Anonymous crash diagnostics are processed by Sentry in the EU and contain no personal,
+      account, or fitness data.</li>
   </ul>
   <p>No method of storage or transmission is 100% secure, but we use reasonable measures to protect
   your information.</p>
@@ -195,6 +233,9 @@
       newer backups or deleted on your request.</li>
     <li><strong>Account records</strong> are retained until you delete your account — instantly via
       the in-app <em>Delete account</em> feature, or within 30 days of an email request.</li>
+    <li><strong>Crash diagnostics</strong> are retained by Sentry for a limited period (Sentry's
+      default is 90 days) and then deleted. Turning off crash reporting stops any further
+      collection.</li>
   </ul>
 
   <h2>Data deletion and your rights</h2>
