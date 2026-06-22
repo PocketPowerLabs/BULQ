@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="index, follow" />
+  <title>Privacy Policy — BULQ</title>
+  <meta name="description" content="Privacy Policy for the BULQ workout tracking app for Android." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #1a1a1a;
+      --muted: #5b5b5b;
+      --rule: #e6e6e6;
+      --accent: #6b8e23;
+      --link: #3a6ea5;
+      --maxw: 760px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #14161a;
+        --fg: #e6e6e6;
+        --muted: #a0a4ab;
+        --rule: #2a2e35;
+        --accent: #a6c34c;
+        --link: #7fb0e0;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 2.5rem 1.25rem 5rem;
+    }
+    main { max-width: var(--maxw); margin: 0 auto; }
+    h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 .25rem; }
+    h2 {
+      font-size: 1.25rem;
+      margin: 2.5rem 0 .6rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--rule);
+    }
+    h3 { font-size: 1.02rem; margin: 1.4rem 0 .35rem; }
+    p, ul { margin: .6rem 0; }
+    ul { padding-left: 1.4rem; }
+    li { margin: .3rem 0; }
+    a { color: var(--link); }
+    code {
+      background: var(--rule);
+      padding: .08em .4em;
+      border-radius: 4px;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: .9em;
+    }
+    .effective { color: var(--muted); font-size: .95rem; margin: 0 0 1.5rem; }
+    .intro { font-size: 1.02rem; }
+    .accent { color: var(--accent); font-weight: 600; }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--rule);
+      color: var(--muted);
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Privacy Policy for BULQ</h1>
+  <p class="effective"><strong>Effective date:</strong> 19 June 2026</p>
+
+  <p class="intro">This Privacy Policy explains how <strong>BULQ</strong> ("we", "us", or "our")
+  handles your information in the BULQ mobile application ("BULQ", "the app"). BULQ is a workout
+  tracking app for Android. By using BULQ you agree to the practices described here.</p>
+
+  <p>We built BULQ to keep your data on your device by default. We do not run any advertising,
+  analytics, or third-party tracking, and we never sell your data.</p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li><strong>No ads, no analytics, no trackers.</strong> We do not collect usage analytics or
+      crash telemetry, and we include no advertising or tracking SDKs.</li>
+    <li><strong>Your workout data lives on your device.</strong> It is stored locally and is only
+      sent to the cloud if you sign in and turn on Cloud Backup.</li>
+    <li><strong>Sign-in is optional</strong> and used only for cloud backup. You can use the core
+      app without an account.</li>
+    <li><strong>Health Connect is optional and one-way</strong> — if you enable it, BULQ
+      <em>writes</em> workouts and body weight to your Android Health Connect. BULQ does not read
+      your Health Connect data.</li>
+    <li><strong>You can delete your data</strong> at any time, including permanent
+      <strong>in-app account deletion</strong> (see <em>Data deletion</em>).</li>
+  </ul>
+
+  <h2>Information we collect</h2>
+
+  <h3>1. Account information (only if you sign in)</h3>
+  <p>BULQ uses <strong>Google Sign-In</strong> for optional account creation. When you sign in,
+  we receive from Google and store, via our authentication provider (Supabase), your:</p>
+  <ul>
+    <li>email address,</li>
+    <li>Google account identifier, and</li>
+    <li>display name (if provided by your Google account).</li>
+  </ul>
+  <p>This is used solely to create your account and associate your cloud backups with you.
+  Authentication tokens are stored in the <strong>Android Keystore</strong> on your device, not in
+  plaintext.</p>
+
+  <h3>2. Health and fitness data</h3>
+  <p>BULQ records the fitness information you enter, which may include:</p>
+  <ul>
+    <li>workouts, exercises, sets, reps, and weights;</li>
+    <li>routines, training plans, and personal records;</li>
+    <li>body weight and body measurements;</li>
+    <li>profile attributes you optionally provide: sex, age, height, and activity level.</li>
+  </ul>
+  <p>This data is stored <strong>locally on your device</strong>. It is uploaded to the cloud
+  <strong>only</strong> if you are signed in and have enabled Cloud Backup (see
+  <em>Cloud backup</em>).</p>
+
+  <h3>3. App settings and preferences</h3>
+  <p>Your in-app settings (units, rest-timer preferences, theme/accent, plate inventory,
+  breathing-guide options, etc.) are stored locally and included in backups you create.</p>
+
+  <h3>4. Information we do <strong>not</strong> collect</h3>
+  <p>We do <strong>not</strong> collect your precise or approximate location, contacts, photos,
+  microphone or camera input, advertising identifiers, or app-usage analytics. We do not track you
+  across other apps or websites.</p>
+
+  <h2>How we use your information</h2>
+  <p>We use the information above only to:</p>
+  <ul>
+    <li>provide and operate the app's features;</li>
+    <li>authenticate you (if you sign in) and store/restore your cloud backups;</li>
+    <li>write workouts and body weight to Health Connect, if you enable it.</li>
+  </ul>
+  <p>We do <strong>not</strong> use your data for advertising, profiling, or sale, and we do not
+  use your health data for any purpose other than providing the features you request.</p>
+
+  <h2>Cloud backup (optional)</h2>
+  <p>Cloud Backup is an optional feature. When enabled (and when you are signed in), BULQ uploads a
+  copy of your app data — the fitness and settings data listed above — as a JSON file to storage
+  operated by <strong>Supabase</strong> on our behalf. Backups are transmitted over HTTPS and are
+  accessible only to your authenticated account (enforced by per-user access rules).</p>
+  <ul>
+    <li>We retain only the <strong>most recent 3 backups</strong>; older backups are automatically
+      deleted.</li>
+    <li>If you do not enable Cloud Backup, none of your fitness data leaves your device through this
+      feature.</li>
+  </ul>
+  <p>You can also export your data manually to a JSON or CSV file via the app's share sheet; those
+  exports are controlled entirely by you.</p>
+
+  <h2>Health Connect</h2>
+  <p>If you enable the Health Connect integration, BULQ <strong>writes</strong> the following to
+  your device's Android Health Connect store:</p>
+  <ul>
+    <li>exercise/workout sessions, and</li>
+    <li>body weight records.</li>
+  </ul>
+  <p>BULQ <strong>does not read</strong> data from Health Connect, and Health Connect data is
+  <strong>not</strong> transmitted to us or to any third party. This integration is off by default
+  and can be turned off at any time in BULQ's settings or in Health Connect itself. Your use of
+  Health Connect is also governed by Google's Health Connect terms and privacy policy.</p>
+
+  <h2>How we share information</h2>
+  <p>We do not sell your personal information and we do not share it for advertising. We share data
+  only with service providers that operate the app on our behalf:</p>
+  <ul>
+    <li><strong>Supabase</strong> — authentication and cloud backup storage (only if you sign in /
+      enable backup).</li>
+    <li><strong>Google</strong> — Google Sign-In and Google Play services (only if you sign in).</li>
+  </ul>
+  <p>We may disclose information if required by law, regulation, or valid legal process, or to
+  protect the rights, safety, and security of our users or the app.</p>
+
+  <h2>Data storage and security</h2>
+  <ul>
+    <li>On-device data is stored in the app's private storage (SQLite and MMKV).</li>
+    <li>Authentication tokens are stored in the <strong>Android Keystore</strong>.</li>
+    <li>Network traffic to our service provider uses <strong>HTTPS/TLS</strong>.</li>
+    <li>Cloud backups are protected by per-user access controls so that only your authenticated
+      account can read them.</li>
+  </ul>
+  <p>No method of storage or transmission is 100% secure, but we use reasonable measures to protect
+  your information.</p>
+
+  <h2>Data retention</h2>
+  <ul>
+    <li><strong>Local data</strong> remains on your device until you delete it within the app, clear
+      the app's data, or uninstall BULQ.</li>
+    <li><strong>Cloud backups</strong> are retained as the most recent 3 copies until replaced by
+      newer backups or deleted on your request.</li>
+    <li><strong>Account records</strong> are retained until you delete your account — instantly via
+      the in-app <em>Delete account</em> feature, or within 30 days of an email request.</li>
+  </ul>
+
+  <h2>Data deletion and your rights</h2>
+  <p>You can remove your data in the following ways:</p>
+  <ul>
+    <li><strong>Delete your account and cloud data (in the app)</strong> — go to
+      <strong>Profile → Danger Zone → "Delete account &amp; cloud data"</strong> and type
+      <code>DELETE</code> to confirm. This <strong>immediately and permanently</strong> deletes your
+      account, your sign-in email and profile, and all of your cloud backups. You can optionally
+      erase the data on your device in the same step. (This does not cancel any Google Play
+      subscription.)</li>
+    <li><strong>Erase all data on this device (in the app)</strong> —
+      <strong>Profile → Danger Zone → "Erase all data on this device"</strong> removes everything
+      BULQ has stored locally and resets the app.</li>
+    <li><strong>Sign out</strong> — stops cloud backups and clears authentication tokens from your
+      device.</li>
+    <li><strong>Uninstall BULQ</strong> or clear the app's data — removes all locally stored data
+      from your device.</li>
+    <li><strong>By email</strong> — if you cannot access the app, email us at
+      <a href="mailto:butucea@gmail.com">butucea@gmail.com</a> from or referencing the email address
+      associated with your account, and we will delete your account and any stored cloud backups
+      within <strong>30 days</strong>.</li>
+  </ul>
+  <p>Depending on where you live, you may have rights to access, correct, export, or delete your
+  personal data (for example under the GDPR or CCPA). To exercise these rights, contact us at
+  <a href="mailto:butucea@gmail.com">butucea@gmail.com</a>. We do not discriminate against you for
+  exercising your privacy rights.</p>
+
+  <h2>App permissions</h2>
+  <p>BULQ requests only the permissions it needs:</p>
+  <ul>
+    <li><strong>Internet</strong> — sign-in and cloud backup.</li>
+    <li><strong>Notifications</strong> — rest-timer alerts.</li>
+    <li><strong>Foreground service (health)</strong> — keeps the rest timer running reliably during
+      a workout.</li>
+    <li><strong>Health Connect (optional)</strong> — writing workouts and body weight, as described
+      above.</li>
+  </ul>
+
+  <h2>Children's privacy</h2>
+  <p>BULQ is not directed to children under 13 (or the minimum age required in your jurisdiction),
+  and we do not knowingly collect personal information from them. If you believe a child has provided
+  us personal information, contact us and we will delete it.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time. Material changes will be reflected by
+  updating the "Effective date" above and, where appropriate, through an in-app notice.</p>
+
+  <h2>Contact</h2>
+  <p>If you have questions about this Privacy Policy or your data, contact us at:</p>
+  <p><strong>BULQ</strong><br />
+  Email: <a href="mailto:butucea@gmail.com">butucea@gmail.com</a></p>
+
+  <footer>
+    © 2026 BULQ. This page is the official privacy policy for the BULQ Android app.
+  </footer>
+</main>
+</body>
+</html>
