@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Delete your BULQ data — BULQ</title>
+<title>Delete your BULQ data - BULQ</title>
 <meta name="description" content="Permanently delete your BULQ cloud account and all cloud backups from your browser, or use the in-app and email options.">
 <!-- Unlisted compliance URL (Play Console → Data safety → Data deletion). Keep out of nav/sitemap. -->
 <meta name="robots" content="noindex,nofollow">
-<link rel="canonical" href="https://bulq.app/delete-data.html">
+<link rel="canonical" href="https://pocketpowerlabs.github.io/BULQ/delete-data.html">
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/tools.css">
 <style>
@@ -78,7 +78,7 @@
 <main class="tool-page del-wrap">
   <header class="del-hero">
     <h1>Delete your BULQ data</h1>
-    <p class="sub">Permanently delete your BULQ cloud account and all cloud backups — right here in your
+    <p class="sub">Permanently delete your BULQ cloud account and all cloud backups - right here in your
       browser, no app needed.</p>
   </header>
 
@@ -91,7 +91,7 @@
       <li>All cloud backups</li>
     </ul>
     <p class="del-note"><b>This does not</b> cancel any Google Play subscription. On-device data is
-      removed when you uninstall BULQ or use <b>Erase all data on this device</b> in the app.</p>
+      removed when you uninstall BULQ or use <b>Profile / Erase all data on this device</b> in the app.</p>
   </section>
 
   <!-- Live web deletion -->
@@ -109,7 +109,7 @@
     <div class="state" id="state-confirm">
       <div class="result-label">Confirm deletion</div>
       <p class="del-note" style="margin-top:8px">Signed in as</p>
-      <div class="email-chip"><span class="dot"></span><span id="signed-email">—</span></div>
+      <div class="email-chip"><span class="dot"></span><span id="signed-email">-</span></div>
       <p class="del-note">This will permanently remove your cloud account, your sign-in email and
         profile, and all of your cloud backups.</p>
 
@@ -154,16 +154,9 @@
 <!-- Google Identity Services (rendered button, popup mode). onload guarantees `google` is defined. -->
 <script src="https://accounts.google.com/gsi/client" async onload="onGisLoaded()"></script>
 
-<!--
-  ⚠️ DEPLOY TODO (hardening #3): pin an EXACT supabase-js v2 version + add Subresource Integrity.
-  Generate both (needs network) with:
-    ver=$(curl -s "https://data.jsdelivr.com/v1/packages/npm/@supabase/supabase-js/resolved?specifier=2" \
-          | python -c "import sys,json;print(json.load(sys.stdin)['version'])")
-    curl -sL "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@${ver}/dist/umd/supabase.js" \
-          | openssl dgst -sha384 -binary | openssl base64 -A
-  Then set src=...@<ver>/... and add integrity="sha384-<hash>".
--->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+<!-- Pinned + SRI (hardening #3). Regenerate the integrity hash if you bump the version. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.108.2/dist/umd/supabase.js"
+        integrity="sha384-nD3dwv4+ZqdYnmZKe/249ImlV04om7xTCcsoSeQYI+RO+XlKPoqAWaJR1M5SJH9p"
         crossorigin="anonymous"></script>
 
 <script type="module" src="assets/js/chrome.js"></script>
@@ -172,7 +165,7 @@
   // ── Clickjacking frame-buster (hardening #2). Cross-origin assign can throw → swallow. ──
   try { if (window.top !== window.self) window.top.location = window.self.location; } catch (e) {}
 
-  // Public values (all already shipped inside the APK — safe in client code).
+  // Public values (all already shipped inside the APK - safe in client code).
   var SUPABASE_URL = 'https://duepsrkvdgpawxbcdlwe.supabase.co';
   var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1ZXBzcmt2ZGdwYXd4YmNkbHdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4NTgwOTAsImV4cCI6MjA5MTQzNDA5MH0.-yZla6aFRVv6WspVYS7vlrhqAWTvN2AczYnZJguE2As';
   var GOOGLE_WEB_CLIENT_ID = '997579928098-8hcm2c4889kv4acp1rj1hmcv70nsn3cr.apps.googleusercontent.com';
@@ -284,7 +277,7 @@
       try {
         var body = await error.context.clone().json();
         if (body && typeof body.error === 'string' && body.error) message = body.error;
-      } catch (e) { /* body wasn't JSON — keep the generic message */ }
+      } catch (e) { /* body wasn't JSON - keep the generic message */ }
 
       // A retry after the user is already gone 401s in the function's getUser() step → success.
       if (status === 401 || /user not found/i.test(message)) {
@@ -299,7 +292,7 @@
   }
 
   async function finishSuccess() {
-    // Best-effort only — with persistSession:false there is nothing stored to clear.
+    // Best-effort only - with persistSession:false there is nothing stored to clear.
     try { if (sb) await sb.auth.signOut(); } catch (e) {}
     setState('state-success');
   }
