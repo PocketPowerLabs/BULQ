@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete your BULQ data — BULQ</title>
+<meta name="description" content="Permanently delete your BULQ cloud account and all cloud backups from your browser, or use the in-app and email options.">
+<!-- Unlisted compliance URL (Play Console → Data safety → Data deletion). Keep out of nav/sitemap. -->
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://bulq.app/delete-data.html">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/tools.css">
+<style>
+  /* Page-specific bits not covered by site.css / tools.css */
+  :root { --danger: #FF5A5A; --danger-d: #E04848; }
+
+  .del-wrap { max-width: 640px; }
+  .del-hero { padding: 120px 0 8px; }   /* clears the fixed nav */
+  .del-hero h1 {
+    font-size: clamp(30px, 5vw, 46px); font-weight: 800;
+    letter-spacing: -1.5px; line-height: 1.05; margin-bottom: 14px; text-wrap: balance;
+  }
+  .del-hero .sub { font-size: 17px; line-height: 1.6; color: rgba(255,255,255,0.55); max-width: 520px; }
+
+  .del-card { margin-top: 22px; }        /* used together with .calc for the surface look */
+
+  .bullets { list-style: none; margin: 8px 0 0; }
+  .bullets li {
+    position: relative; padding-left: 20px; margin-bottom: 9px;
+    color: var(--text); font-weight: 600;
+  }
+  .bullets li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+  }
+
+  .del-note { color: var(--text-2); font-size: 13px; line-height: 1.6; margin-top: 14px; }
+  .del-note b { color: rgba(255,255,255,0.85); font-weight: 700; }
+  a.link { color: var(--accent); text-decoration: none; }
+  a.link:hover { text-decoration: underline; }
+
+  .state { display: none; }
+  .state.active { display: block; }
+
+  .email-chip {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--input); border: 1px solid var(--border);
+    border-radius: 999px; padding: 8px 15px; font-size: 14px; font-weight: 600; margin: 4px 0;
+  }
+  .email-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+
+  .confirm-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--text-2); margin: 18px 0 8px;
+  }
+
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover { background: var(--danger-d); }
+  .btn[disabled] { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .gbtn-wrap { margin-top: 14px; min-height: 44px; }
+
+  .spinner {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2.5px solid rgba(255,255,255,0.35); border-top-color: #fff;
+    animation: del-spin 0.7s linear infinite;
+  }
+  @keyframes del-spin { to { transform: rotate(360deg); } }
+
+  .result-icon { font-size: 38px; line-height: 1; margin-bottom: 10px; }
+  .state h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<div data-site-nav data-active="" data-root=""></div>
+
+<main class="tool-page del-wrap">
+  <header class="del-hero">
+    <h1>Delete your BULQ data</h1>
+    <p class="sub">Permanently delete your BULQ cloud account and all cloud backups — right here in your
+      browser, no app needed.</p>
+  </header>
+
+  <!-- What gets deleted (always visible) -->
+  <section class="calc del-card">
+    <div class="result-label">What gets deleted</div>
+    <ul class="bullets">
+      <li>Your cloud account</li>
+      <li>Your email and profile from sign-in</li>
+      <li>All cloud backups</li>
+    </ul>
+    <p class="del-note"><b>This does not</b> cancel any Google Play subscription. On-device data is
+      removed when you uninstall BULQ or use <b>Erase all data on this device</b> in the app.</p>
+  </section>
+
+  <!-- Live web deletion -->
+  <section class="calc del-card" aria-label="Delete your account on the web">
+    <!-- STATE: sign in -->
+    <div class="state active" id="state-signin">
+      <div class="result-label">Delete on the web</div>
+      <p class="del-note" style="margin-top:8px">Sign in with the Google account you use for BULQ to
+        permanently delete it. This <b>cannot be undone</b>.</p>
+      <div class="gbtn-wrap" id="gbtn"></div>
+      <div class="note error" id="signin-error" hidden></div>
+    </div>
+
+    <!-- STATE: confirm -->
+    <div class="state" id="state-confirm">
+      <div class="result-label">Confirm deletion</div>
+      <p class="del-note" style="margin-top:8px">Signed in as</p>
+      <div class="email-chip"><span class="dot"></span><span id="signed-email">—</span></div>
+      <p class="del-note">This will permanently remove your cloud account, your sign-in email and
+        profile, and all of your cloud backups.</p>
+
+      <div class="confirm-label">Type DELETE to confirm</div>
+      <div class="field">
+        <input id="confirm-input" type="text" autocomplete="off" autocapitalize="characters"
+               autocorrect="off" spellcheck="false" placeholder="DELETE">
+      </div>
+
+      <div class="calc-actions">
+        <button class="btn btn-danger" id="delete-btn" type="button" disabled>Delete my account</button>
+        <button class="btn btn-ghost" id="cancel-btn" type="button">Cancel</button>
+      </div>
+      <div class="note error" id="confirm-error" hidden></div>
+    </div>
+
+    <!-- STATE: success -->
+    <div class="state" id="state-success">
+      <div class="result-icon" style="color:var(--accent)">&#10003;</div>
+      <h2>Account deleted</h2>
+      <p class="del-note">Your account and cloud data have been permanently deleted. You can close
+        this page.</p>
+    </div>
+  </section>
+
+  <!-- Other ways to delete (always visible) -->
+  <section class="calc del-card">
+    <div class="result-label">Other ways to delete your data</div>
+    <p class="del-note" style="margin-top:10px"><b>In the app:</b> go to
+      <b>Profile &rarr; Danger Zone &rarr; &ldquo;Delete account &amp; cloud data&rdquo;</b> and type
+      <b>DELETE</b> to confirm. This immediately and permanently deletes your account and all cloud
+      backups.</p>
+    <p class="del-note"><b>By email:</b> if you can&rsquo;t access the app, email
+      <a class="link" href="mailto:pocketpowerlabs@gmail.com">pocketpowerlabs@gmail.com</a> from or
+      referencing your account&rsquo;s email address, and we&rsquo;ll delete your account and any
+      cloud backups within <b>30 days</b>.</p>
+  </section>
+</main>
+
+<div data-site-footer></div>
+
+<!-- Google Identity Services (rendered button, popup mode). onload guarantees `google` is defined. -->
+<script src="https://accounts.google.com/gsi/client" async onload="onGisLoaded()"></script>
+
+<!--
+  ⚠️ DEPLOY TODO (hardening #3): pin an EXACT supabase-js v2 version + add Subresource Integrity.
+  Generate both (needs network) with:
+    ver=$(curl -s "https://data.jsdelivr.com/v1/packages/npm/@supabase/supabase-js/resolved?specifier=2" \
+          | python -c "import sys,json;print(json.load(sys.stdin)['version'])")
+    curl -sL "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@${ver}/dist/umd/supabase.js" \
+          | openssl dgst -sha384 -binary | openssl base64 -A
+  Then set src=...@<ver>/... and add integrity="sha384-<hash>".
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
+        crossorigin="anonymous"></script>
+
+<script type="module" src="assets/js/chrome.js"></script>
+
+<script>
+  // ── Clickjacking frame-buster (hardening #2). Cross-origin assign can throw → swallow. ──
+  try { if (window.top !== window.self) window.top.location = window.self.location; } catch (e) {}
+
+  // Public values (all already shipped inside the APK — safe in client code).
+  var SUPABASE_URL = 'https://duepsrkvdgpawxbcdlwe.supabase.co';
+  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1ZXBzcmt2ZGdwYXd4YmNkbHdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4NTgwOTAsImV4cCI6MjA5MTQzNDA5MH0.-yZla6aFRVv6WspVYS7vlrhqAWTvN2AczYnZJguE2As';
+  var GOOGLE_WEB_CLIENT_ID = '997579928098-8hcm2c4889kv4acp1rj1hmcv70nsn3cr.apps.googleusercontent.com';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var signinError = $('signin-error');
+  var confirmError = $('confirm-error');
+  var confirmInput = $('confirm-input');
+  var deleteBtn = $('delete-btn');
+  var cancelBtn = $('cancel-btn');
+
+  var busy = false;
+
+  // No session is ever written to storage (shared-PC hygiene); the JWT lives in memory only.
+  var sb = null;
+  if (typeof supabase !== 'undefined' && supabase.createClient) {
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    });
+  } else {
+    showSigninError('Couldn’t load the deletion service. Use the in-app or email options below.');
+  }
+
+  function setState(id) {
+    ['state-signin', 'state-confirm', 'state-success'].forEach(function (s) {
+      $(s).classList.toggle('active', s === id);
+    });
+  }
+  function showSigninError(msg) { signinError.textContent = msg; signinError.hidden = false; }
+  function showConfirmError(msg) { confirmError.textContent = msg; confirmError.hidden = false; }
+
+  function refreshDeleteBtn() {
+    deleteBtn.disabled = busy || confirmInput.value.trim() !== 'DELETE';
+  }
+  function setBusy(b) {
+    busy = b;
+    confirmInput.disabled = b;
+    cancelBtn.disabled = b;
+    deleteBtn.innerHTML = b ? '<span class="spinner"></span>' : 'Delete my account';
+    refreshDeleteBtn();
+  }
+
+  // ── GIS: rendered button → Google ID token (mirrors authService.signInWithGoogle, no nonce) ──
+  window.onGisLoaded = function () {
+    if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) {
+      showSigninError('Google sign-in couldn’t load. Use the in-app or email options below.');
+      return;
+    }
+    google.accounts.id.initialize({
+      client_id: GOOGLE_WEB_CLIENT_ID,
+      callback: onGoogleCredential,
+      ux_mode: 'popup',
+      auto_select: false,
+      itp_support: true,
+    });
+    google.accounts.id.renderButton($('gbtn'), {
+      theme: 'filled_black', size: 'large', text: 'signin_with', shape: 'pill',
+    });
+  };
+
+  async function onGoogleCredential(resp) {
+    if (!sb) return;
+    signinError.hidden = true;
+    try {
+      var out = await sb.auth.signInWithIdToken({ provider: 'google', token: resp.credential });
+      if (out.error || !out.data || !out.data.session) {
+        return showSigninError('Sign-in failed. Please try again.');
+      }
+      $('signed-email').textContent = out.data.session.user.email || 'your account';
+      setState('state-confirm');
+      confirmInput.focus();
+    } catch (e) {
+      showSigninError('Sign-in failed. Please try again.');
+    }
+  }
+
+  // ── Delete: same Edge Function the app calls; error mapping mirrors accountService ──
+  async function onDelete() {
+    if (busy || !sb || confirmInput.value.trim() !== 'DELETE') return;
+    confirmError.hidden = true;
+    setBusy(true);
+
+    var res;
+    try {
+      res = await sb.functions.invoke('delete-account');
+    } catch (e) {
+      setBusy(false);
+      return showConfirmError('Could not delete your account. Please try again.');
+    }
+
+    if (res.error) {
+      var handledAsSuccess = await mapInvokeError(res.error);
+      if (!handledAsSuccess) setBusy(false);
+      return;
+    }
+    await finishSuccess();
+  }
+
+  // Returns true if the error actually means "already deleted" (treated as success).
+  async function mapInvokeError(error) {
+    var name = error && error.name;
+    if (name === 'FunctionsFetchError') {
+      showConfirmError('You need to be online to delete your account.');
+      return false;
+    }
+    if (name === 'FunctionsHttpError' && error.context) {
+      var status = error.context.status;
+      var message = 'Could not delete your account. Please try again.';
+      try {
+        var body = await error.context.clone().json();
+        if (body && typeof body.error === 'string' && body.error) message = body.error;
+      } catch (e) { /* body wasn't JSON — keep the generic message */ }
+
+      // A retry after the user is already gone 401s in the function's getUser() step → success.
+      if (status === 401 || /user not found/i.test(message)) {
+        await finishSuccess();
+        return true;
+      }
+      showConfirmError(message);
+      return false;
+    }
+    showConfirmError('Could not delete your account. Please try again.');
+    return false;
+  }
+
+  async function finishSuccess() {
+    // Best-effort only — with persistSession:false there is nothing stored to clear.
+    try { if (sb) await sb.auth.signOut(); } catch (e) {}
+    setState('state-success');
+  }
+
+  async function onCancel() {
+    try { if (sb) await sb.auth.signOut(); } catch (e) {}
+    confirmInput.value = '';
+    refreshDeleteBtn();
+    setState('state-signin');
+  }
+
+  confirmInput.addEventListener('input', refreshDeleteBtn);
+  confirmInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !deleteBtn.disabled) onDelete();
+  });
+  deleteBtn.addEventListener('click', onDelete);
+  cancelBtn.addEventListener('click', onCancel);
+</script>
+</body>
+</html>
