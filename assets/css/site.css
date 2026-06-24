@@ -1,0 +1,132 @@
+/* ════════════════════════════════════════════════════════════
+   site.css — shared chrome for the whole BULQ marketing site
+   Single source of truth for: design tokens, reset, fonts,
+   nav, footer, buttons, scroll-reveal, section labels.
+   Extracted verbatim from index.html / tools.html.
+   ════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: "Inter";
+  /* Path is relative to this CSS file (assets/css/) → repo-root /fonts.
+     Perf TODO (plan §6/§9): subset to woff2 and add it as the first src. */
+  src: url("../../fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #121212;
+  --surface:  #1E1E1E;
+  --elevated: #2A2A2A;
+  --input:    #333333;
+  --panel:    #3C3C3C;
+  --accent:   #D4FF00;
+  --accent-d: #A3C900;
+  --gold:     #FFD700;
+  --text:     #FFFFFF;
+  --text-2:   #888888;
+  --text-3:   #555555;
+  --border:   #333333;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; }
+
+/* ── NAV ─────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px; height: 68px;
+  background: rgba(18,18,18,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-size: 32px; font-weight: 800; letter-spacing: -1.5px;
+  color: var(--text); text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links {
+  display: flex; gap: 24px; list-style: none;
+}
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: var(--text-2);
+  text-decoration: none; letter-spacing: 0.3px;
+  transition: color 180ms;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--text); }
+.nav-cta {
+  background: var(--accent); color: #181818;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.3px;
+  padding: 10px 24px; border-radius: 8px;
+  text-decoration: none; transition: background 180ms;
+}
+.nav-cta:hover { background: var(--accent-d); }
+
+@media (max-width: 720px) {
+  nav { padding: 0 22px; }
+  .nav-links { display: none; }
+}
+
+/* ── SECTION LABEL ───────────────────────────────────── */
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+}
+.section-label::before {
+  content: ''; display: block;
+  width: 28px; height: 1.5px; background: var(--accent);
+}
+
+/* ── REVEAL ──────────────────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.07s; }
+.reveal-delay-2 { transition-delay: 0.14s; }
+.reveal-delay-3 { transition-delay: 0.21s; }
+
+/* ── FOOTER ──────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  background: var(--bg);
+}
+.footer-logo { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+.footer-logo span { color: var(--accent); }
+footer p { font-size: 12px; color: var(--text-3); }
+
+/* Google Play button (footer + app CTA) */
+.gplay-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: #000; color: #fff; border-radius: 10px;
+  padding: 10px 20px; text-decoration: none; border: 1px solid #333;
+  transition: border-color 180ms, transform 180ms;
+}
+.gplay-btn:hover { border-color: #555; transform: translateY(-2px); }
+.gplay-btn .gplay-label { display: flex; flex-direction: column; text-align: left; line-height: 1.25; }
+.gplay-btn .gplay-small { font-size: 9px; font-weight: 400; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; }
+.gplay-btn .gplay-big { font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
+
+@media (max-width: 720px) {
+  footer { padding: 32px 22px; }
+}
